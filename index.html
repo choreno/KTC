@@ -39,8 +39,23 @@
 
 
 
-
+        
         <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyDX4hUF7OsxOSeFDKgOmKyiBggB0mgf5v0",
+            authDomain: "kators-tennis-club.firebaseapp.com",
+            databaseURL: "https://kators-tennis-club.firebaseio.com",
+            projectId: "kators-tennis-club",
+            storageBucket: "kators-tennis-club.appspot.com",
+            messagingSenderId: "896954058887"
+          };
+          firebase.initializeApp(config);
+        </script>
+
+
+
+        <!-- <script>
           // Initialize Firebase
           var config = {
             apiKey: "AIzaSyCQ9zfUj2b5UGCAmisyiMy0ha3gkx1goM8",
@@ -51,11 +66,11 @@
             messagingSenderId: "817297339818"
           };
           firebase.initializeApp(config);
-        </script>
+        </script> -->
 
 
          <!-- initialize script -->
-         <!-- <script src="initialize.js"></script> -->
+         <script src="initialize.js"></script>
         <!-- filtering scripts -->
         <!-- <script src="filter.js"></script> -->
         <!-- custom script -->
@@ -64,7 +79,7 @@
     </head>
     <body>
         <div class="alert alert-success text-center" id="dashboard" role="alert">
-             <h1> Employees DASHBOARD </h1>
+             <!-- <h1> Employees DASHBOARD </h1> -->
         </div>
 
         <div class="container">
