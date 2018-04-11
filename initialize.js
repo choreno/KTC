@@ -15,7 +15,6 @@ const initialNumberOfMonths = 12;
 AddInitialMemberData();
 AddInitialMatchData();
 
-//LoadData();
 
 
 function AddInitialMatchData() {
@@ -70,20 +69,6 @@ function AddInitialMatchData() {
 
 
 }
-
-
-
-function LoadData() {
-    membersRef.get()
-        .then(function (x) {
-            x.forEach(function (doc) {
-                console.log(doc.data());
-            })
-
-        });
-
-}
-
 
 
 function getTuesdays(targetYear, targetMonth) {
