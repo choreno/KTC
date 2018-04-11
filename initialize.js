@@ -9,95 +9,67 @@ let shortMonthName = new Intl.DateTimeFormat('en-US', {
 }).format;
 
 const startYear = '2018';
+const initialNumberOfMonths = 12;
 
-AddInitialMembers();
+
+AddInitialMemberData();
+AddInitialMatchData();
+
 //LoadData();
-AddMatchData();
-
-let currentYear = startYear;
-let currentMonth = new Date().getMonth() + 1;
-
-//console.log(currentMonth);
 
 
+function AddInitialMatchData() {
 
-function AddMatchData() {
-
-    for (let i = 0; i < allMembers.length; i++) {
+    for (let member = 0; member < allMembers.length; member++) {
 
 
-        let id = `${allMembers[i].lName} ${allMembers[i].fName}`;
+        let id = `${allMembers[member].lName} ${allMembers[member].fName}`;
+        //let id = `BAE Heesung`;
 
-        console.log(id);
+        let mergedMonthFields = {};
 
-        //until current month
+        for (let month = 1; month <= initialNumberOfMonths; month++) {
 
-        for (let month = 1; month < 2; month++) {
+            //console.log(month);
+            let tuesdays = getTuesdays(startYear, month);
+            //console.log(tuesdays);
+            let mergedDayFields = {};
+            for (let i = 0; i < tuesdays.length; i++) {
 
-            //Get current month's Tuesdays
-            let tuesdays = getTuesdays(2018, month);
-
-            console.log(tuesdays);
-
-            let matchData = {
-
-                [2018]: {
-                    [shortMonthName(tuesdays[i])]: {
-                        [`${new Intl.DateTimeFormat('en-US').format(tuesdays[i])}`]: {
-                            attendence: "NA",
-                            results: ["NA", "NA", "NA"]
-                        }
+                let dayField = {
+                    [`${new Intl.DateTimeFormat('en-US').format(tuesdays[i])}`]: {
+                        attendence: "NA",
+                        results: ["NA", "NA", "NA"]
                     }
                 }
 
+                mergedDayFields = Object.assign(mergedDayFields, dayField);
 
             }
 
-            membersRef.doc(id).update(matchData);
+            let thisMonthField = {
+                [shortMonthName(new Date(startYear, month - 1, 1))]: mergedDayFields
+            }
 
+            mergedMonthFields = Object.assign(mergedMonthFields, thisMonthField);
 
         }
 
+        //console.log(mergedMonthFields);
+
+        let yearField = {
+            [startYear]: mergedMonthFields
+        }
+
+        //console.log(yearField);
+
+        membersRef.doc(id).update(yearField);
     }
 
 
 
+
 }
-
-
-// for (let i = 0; i < tuesdays.length; i++) {
-
-//     // let data = {
-
-//     //     [tuesdays[i].getFullYear()]: {
-//     //         [shortMonthName(tuesdays[i])]: {
-//     //             [`${new Intl.DateTimeFormat('en-US').format(tuesdays[i])}`]: {
-//     //                 attendence: "NA",
-//     //                 results: ["NA", "NA", "NA"]
-//     //             }
-//     //         }
-//     //     }
-//     // };
-
-
-//     membersRef.doc("CHO Changburm").set({
-
-//         [tuesdays[i].getFullYear()]: {
-//             [shortMonthName(tuesdays[i])]: {
-//                 [`${new Intl.DateTimeFormat('en-US').format(tuesdays[i])}`]: {
-//                     attendence: "NA",
-//                     results: ["NA", "NA", "NA"]
-//                 }
-//             }
-//         }
-
-//     }, {
-//         merge: true
-//     });
-
-// }
-
-//let dttm = getTuesdays();
 
 
 
@@ -150,7 +122,7 @@ function getTuesdays(targetYear, targetMonth) {
 
 
 
-function AddInitialMembers() {
+function AddInitialMemberData() {
 
     let members = GetAllMembers();
 
