@@ -13,7 +13,70 @@ const initialNumberOfMonths = 12;
 
 
 AddInitialMemberData();
-AddInitialMatchData();
+//AddInitialMatchData();
+
+// Get a data 
+
+// membersRef.where("fName", "==", "Changburm") //.where("maches.2019", ">=", true)
+//     .get()
+//     .then(function (data) {
+
+//         //rData = data;
+//         data.forEach(function (doc) {
+
+//             var temp = doc.data();
+//             let temp2 = temp.matches["2018"].Jan;
+//             console.log(temp2);
+
+//             for (let key in temp2) {
+//                 if (temp2.hasOwnProperty(key)) {
+//                     let val = temp2[key];
+//                     if (val.attendence === true) {
+//                         let winNumber = val.results.filter(function (x) {
+//                             return x == "W"
+//                         }).length;
+//                         console.log(val);
+//                         console.log(winNumber);
+//                     }
+//                 }
+//             }
+
+//             //console.log(temp3);
+
+//         })
+
+
+//     });
+
+//Update
+var command = {};
+command["matches.2018.Jan.wk1.attendence"] = false; 
+
+
+var testArray = new Array("W", "X", "Y"); 
+
+var cmd2 ={};
+//cmd2["matches.2018.Jan.wk1.results"] = ["L", "W", "W"]
+cmd2["matches.2018.Jan.wk1.results"] = testArray;
+membersRef.doc("CHO Changburm")
+    //.update(command)
+    .update(cmd2)
+    .then(function () {
+        console.log('done!')
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -208,8 +271,70 @@ function GetAllMembers() {
             kName: "조창범",
             email: "",
             phone: "",
-        },
+            matches: {
+                "2018": {
+                    Jan: {
+                        wk1: {
+                            dttm: new Date(),
+                            attendence: false,
+                            results: ["W", "L", "L"],
+                        },
+                        wk2: {
+                            dttm: new Date(),
+                            attendence: true,
+                            results: ["W", "L", "W"],
+                        },
+                        wk3: {
+                            dttm: new Date(),
+                            attendence: false,
+                            results: ["W", "L", "L"],
+                        },
+                        wk4: {
+                            dttm: new Date(),
+                            attendence: true,
+                            results: ["W", "W", "W"],
+                        },
+                        wk5: {
+                            dttm: new Date(),
+                            attendence: false,
+                            results: ["W", "L", "L"],
+                        }
+
+                    }
+                },
+                "2019": {
+                    Jan: {
+                        wk1: {
+                            dttm: new Date(),
+                            attendence: false,
+                            results: ["W", "W", "W"],
+                        },
+                        wk2: {
+                            dttm: new Date(),
+                            attendence: true,
+                            results: ["L", "L", "L"],
+                        }
+                    }
+                },
+
+            },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        } // end
     ]
+
 
     return members;
 }

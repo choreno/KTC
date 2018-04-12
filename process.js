@@ -1,24 +1,29 @@
 let db = firebase.firestore();
 let membersRef = db.collection("members");
 
+let i = 0;
 
 $(document).ready(function () {
 
     //LoadData();
-    var rData ; 
+
+
+    var rData = {};
     membersRef.where("fName", "==", "Changburm")
         .get()
         .then(function (data) {
-            rData = data;
-            // data.forEach(function (doc) {
-            //     console.log(doc.data())
-            // })
+
+            //rData = data;
+            data.forEach(function (doc) {
+                //console.log(doc.data())
+                rData = doc.data();
+                i++;
+                afterLoad(rData);
+
+            })
+
+
         });
-
-    rData.forEach(function(x){
-        console.log(x.data());
-    });
-
 
     // membersRef.doc("CHO Changburm").onSnapshot(function(doc){
     //     console.log(doc.data()["2018"].Apr);
@@ -41,7 +46,23 @@ $(document).ready(function () {
 
 });
 
+function afterLoad(data) {
+    let NumberOfWin = 0;
+    console.log(data["2018"].Apr);
+    
+    for (let i = 0; i < 1; i++) {
+        let temp = data["2018"].Apr["4/17/2018"].results
+            .filter(function (x) {
+                return x == "NA"
+            }).length;
+        
+            console.log(temp)
+    }
 
+
+
+
+}
 
 
 function LoadData() {
