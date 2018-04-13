@@ -300,7 +300,30 @@ function GetAllMembers() {
                             results: ["W", "L", "L"],
                         }
 
+                    },
+                    Feb: {
+                        wk1: {
+                            dttm: new Date(),
+                            attendence: false,
+                            results: ["W", "L", "L"],
+                        },
+                        wk2: {
+                            dttm: new Date(),
+                            attendence: true,
+                            results: ["W", "L", "W"],
+                        },
+                        wk3: {
+                            dttm: new Date(),
+                            attendence: false,
+                            results: ["W", "L", "L"],
+                        },
+                        wk4: {
+                            dttm: new Date(),
+                            attendence: true,
+                            results: ["W", "W", "W"],
+                        }
                     }
+
                 },
                 "2019": {
                     Jan: {
